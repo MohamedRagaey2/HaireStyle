@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "914731190710",
+    "firebase_url": "https://haire-style-8d3e0.firebaseio.com",
+    "project_id": "haire-style-8d3e0",
+    "storage_bucket": "haire-style-8d3e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914731190710:android:55e6ead60bec29d0",
+        "android_client_info": {
+          "package_name": "m.ragaey.mohamed.hairestyle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914731190710-b0a393ii2lb1s9e3a2ikqhe8emonjnte.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1Xwu6bWWsbEupNAFmq7lfn0_3hoMVxQc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
