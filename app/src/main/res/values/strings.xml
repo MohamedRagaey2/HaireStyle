@@ -20,5 +20,7 @@
     <string name="_450_00">450.00</string>
     <string name="customer_name">Customer Name</string>
     <string name="shave_beard">Shave Beard</string>
+    <string name="add">add</string>
+    <string name="toast_Please_Verify_Your_Email">Please Verify Your Email</string>
 
 </resources>
