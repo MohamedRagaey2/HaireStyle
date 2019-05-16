@@ -34,7 +34,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:textColorHint="#fff"
+            android:textColorHint="#000"
             android:layout_marginBottom="20dp"
             >
 
@@ -46,7 +46,7 @@
                 android:textSize="20sp"
                 android:textColor="#000"
                 android:background="#fff"
-                android:hint="Email"
+                android:hint="@string/email"
                 />
 
         </android.support.design.widget.TextInputLayout>
@@ -59,7 +59,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:textColorHint="#fff"
+            android:textColorHint="#000"
             android:layout_marginBottom="40dp"
             >
 
@@ -67,7 +67,7 @@
                 android:id="@+id/password_field_signup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textSize="20sp"
                 android:textColor="#000"
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
-            android:text="sign up"
+            android:text="@string/sign_up"
             android:background="@drawable/sign_up_btn"
             android:layout_above="@id/sign_in_btn"
             android:layout_marginRight="100dp"

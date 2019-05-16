@@ -43,7 +43,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:textColorHint="#fff"
+            android:textColorHint="#000"
             android:layout_marginBottom="20dp"
             >
 
@@ -54,7 +54,7 @@
                 android:inputType="textEmailAddress"
                 android:textSize="20sp"
                 android:textColor="#000"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:background="#fff"
                 />
 
@@ -68,7 +68,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:textColorHint="#fff"
+            android:textColorHint="#000"
             android:layout_marginBottom="40dp"
             >
 
@@ -76,10 +76,10 @@
                 android:id="@+id/password_field_signin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textSize="20sp"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:background="#fff"
 
                 />
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:text="sign in"
+                android:text="@string/sign_in"
                 android:background="@drawable/sign_in_btn"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:text="send verify email"
+                android:text="@string/send_verify_email"
                 android:background="@drawable/sign_in_btn"
                 android:layout_marginRight="20dp"
                 />

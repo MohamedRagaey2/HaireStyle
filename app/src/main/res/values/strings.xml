@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Haire Style</string>
+    <string name="name">Name</string>
+    <string name="shave_hair">Shave Hair</string>
+    <string name="shave_a_beard">Shave a Beard</string>
+    <string name="hair_pigment">Hair Pigment</string>
+    <string name="face_musk">Face Musk</string>
+    <string name="set_time">set time</string>
+    <string name="set_date">set date</string>
+    <string name="_00_00">00 : 00</string>
+    <string name="_00_00_0000">00/00/0000</string>
+    <string name="book_now">Book now</string>
+    <string name="a_verification_email_has_been_sent_to_your_mail_n_nplease_check_your_inbox">A Verification Email has been Sent to your Mail .   Please Check your Inbox ..</string>
+    <string name="done">Done !</string>
+    <string name="sign_up">sign up</string>
+    <string name="sign_in">sign in</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="send_verify_email">send verify email</string>
+    <string name="_450_00">450.00</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="shave_beard">Shave Beard</string>
+
 </resources>
