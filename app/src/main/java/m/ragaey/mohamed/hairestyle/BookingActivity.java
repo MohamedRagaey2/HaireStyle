@@ -2,12 +2,15 @@ package m.ragaey.mohamed.hairestyle;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -30,19 +33,30 @@ public class BookingActivity extends AppCompatActivity {
     Button set_time, set_date, book_now;
     static TextView selected_time, selected_date;
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+
 
     String name, hair2 = "", beard2 = "", pigment2 = "", musk2 = "", time_txt, date_txt;
 
     double price = 0;
-    String price2;
+    String allprice;
+
+    Toast toast;
+
+    LayoutInflater inflater;
+    View view;
+
+    TextView textView;
+
+    ProgressDialog progressDialog;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
-
 
         name_field = findViewById(R.id.name_field);
 
@@ -58,10 +72,18 @@ public class BookingActivity extends AppCompatActivity {
         selected_time = findViewById(R.id.time_txt);
         selected_date = findViewById(R.id.date_txt);
 
+        inflater = LayoutInflater.from(getApplicationContext());
+        view = inflater.inflate(R.layout.custom_toast, null);
+        textView = view.findViewById(R.id.text);
+        textView.setTextColor(Color.WHITE);
+
+        toast = new Toast(getApplicationContext());
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
-        set_time.setOnClickListener(new View.OnClickListener() {
+        set_time.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
@@ -70,35 +92,43 @@ public class BookingActivity extends AppCompatActivity {
             }
         });
 
-        set_date.setOnClickListener(new View.OnClickListener() {
+        set_date.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 DialogFragment newFragment = new DatePickerFragment();
                 newFragment.show(getSupportFragmentManager(), "datePicker");
             }
         });
 
-        book_now.setOnClickListener(new View.OnClickListener() {
+        book_now.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 name = name_field.getText().toString();
 
-                if (hair.isChecked()) {
+                if (hair.isChecked())
+                {
                     price = price + 25;
                     hair2 = "Shave Hair";
                 }
 
-                if (beard.isChecked()) {
+                if (beard.isChecked())
+                {
                     price = price + 15;
                     beard2 = "Shave Beard";
                 }
 
-                if (pigment.isChecked()) {
+                if (pigment.isChecked())
+                {
                     price = price + 35;
                     pigment2 = "Hair Pigment";
                 }
 
-                if (musk.isChecked()) {
+                if (musk.isChecked())
+                {
                     price = price + 20;
                     musk2 = "Face Musk";
                 }
@@ -106,28 +136,27 @@ public class BookingActivity extends AppCompatActivity {
                 time_txt = selected_time.getText().toString();
                 date_txt = selected_date.getText().toString();
 
-                if (name.length() == 0
-                        || time_txt.length() == 0
-                        || date_txt.length() == 0
-                        || hair2.length() == 0
-                        && beard2.length() == 0
-                        && pigment2.length() == 0
-                        && musk2.length() == 0)
+                if (name.length() == 0 || !hair.isChecked() && !beard.isChecked() && !pigment.isChecked() && !musk.isChecked() || time_txt.length() == 0 || date_txt.length() == 0)
                 {
-                    Toast.makeText(BookingActivity.this, "Please Enter A Valid Data", Toast.LENGTH_SHORT).show();
+                    textView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                    textView.setText("Please Enter A Valid Data");
+
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(view);
+                    toast.show();
                 } else
                 {
-                    price2 = Double.toString(price);
-                    writeBookinDatabase(name, hair2, beard2, pigment2, musk2, time_txt, date_txt, price2);
-
-                    Intent intent = new Intent(getApplicationContext(),StartActivity.class);
+                    allprice = "" + price;
+                    writenewBooking(name, hair2, beard2, pigment2, musk2, time_txt, date_txt, allprice);
+                    price = 0;
+                    Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                     startActivity(intent);
                 }
             }
         });
     }
 
-    public void writeBookinDatabase(String name, String hair, String beard, String pigment, String musk, String time, String date, String price)
+    public void writenewBooking (String name, String hair,String beard, String pigment, String musk, String time, String date, String price)
     {
         BookList bookList = new BookList(name,hair,beard,pigment,musk,time,date, price);
 
@@ -135,62 +164,33 @@ public class BookingActivity extends AppCompatActivity {
         databaseReference.child("allbooks").child(key).setValue(bookList);
     }
 
-    public static class TimePickerFragment extends DialogFragment
-            implements TimePickerDialog.OnTimeSetListener
+    public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener
     {
-
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
+        public Dialog onCreateDialog(Bundle savedInstanceState)
+        {
             // Use the current time as the default values for the picker
             final Calendar c = Calendar.getInstance();
             int hour = c.get(Calendar.HOUR_OF_DAY);
             int minute = c.get(Calendar.MINUTE);
 
             // Create a new instance of TimePickerDialog and return it
-            return new TimePickerDialog(getActivity(), this, hour, minute,
+            return new TimePickerDialog(getActivity(), R.style.dialoge, this, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
         }
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute)
         {
             // Do something with the time chosen by the user
-            int hour = hourOfDay;
-            int minutes = minute;
-
-            String timeSet = "";
-            if (hour > 12) {
-                hour -= 12;
-                timeSet = "PM";
-            } else if (hour == 0) {
-                hour += 12;
-                timeSet = "AM";
-            } else if (hour == 12){
-                timeSet = "PM";
-            }else{
-                timeSet = "AM";
-            }
-
-            String min = "";
-            if (minutes < 10)
-                min = "0" + minutes ;
-            else
-                min = String.valueOf(minutes);
-
-            // Append in a StringBuilder
-            String aTime = new StringBuilder().append(hour).append(':')
-                    .append(min ).append(" ").append(timeSet).toString();
-
-            selected_time.setText(aTime);
+            selected_time.setText("" + hourOfDay + " : " + minute);
         }
     }
 
     public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener
-    {
+            implements DatePickerDialog.OnDateSetListener {
 
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState)
-        {
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
@@ -198,14 +198,14 @@ public class BookingActivity extends AppCompatActivity {
             int day = c.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), this, year, month, day);
+            return new DatePickerDialog(getActivity(), R.style.dialoge,this, year, month, day);
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day)
         {
             // Do something with the date chosen by the user
             int month2 = month + 1;
-            selected_date.setText(day + "/" + month2 + "/" + year);
+            selected_date.setText(day + "/" + month2  + "/" + year);
         }
     }
 }

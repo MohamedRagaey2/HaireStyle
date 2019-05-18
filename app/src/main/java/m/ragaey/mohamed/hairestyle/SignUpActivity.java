@@ -1,12 +1,17 @@
 package m.ragaey.mohamed.hairestyle;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,14 +23,25 @@ import com.google.firebase.auth.FirebaseUser;
 public class SignUpActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
+    FirebaseUser user;
 
     EditText email_field, password_field;
     Button sign_up2;
 
     String email, password;
 
+    Toast toast;
+
+    LayoutInflater inflater;
+    View view;
+
+    TextView textView;
+
+    ProgressDialog progressDialog;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
@@ -35,6 +51,13 @@ public class SignUpActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+        inflater = LayoutInflater.from(getApplicationContext());
+        view = inflater.inflate(R.layout.custom_toast, null);
+        textView = view.findViewById(R.id.text);
+        textView.setTextColor(Color.WHITE);
+
+        toast = new Toast(getApplicationContext());
+
         sign_up2.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -43,44 +66,64 @@ public class SignUpActivity extends AppCompatActivity {
                 email = email_field.getText().toString();
                 password = password_field.getText().toString();
 
-                if (email.length()==0 || password.length() ==0)
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password))
                 {
-                    Toast.makeText(getApplicationContext(), "Please Enter A Valid Data", Toast.LENGTH_SHORT).show();
-                }else
+                    textView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                    textView.setText("Please Enter A Valid Data");
+
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(view);
+                    toast.show();
+                } else
                 {
+                    progressDialog = new ProgressDialog(SignUpActivity.this);
+                    progressDialog.setMessage("Signing In ...");
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.show();
+                    progressDialog.setCancelable(false);
+
                     SignUp(email, password);
                 }
             }
         });
-
     }
 
-    public void SignUp(String email,String password)
+    public void SignUp (String email, String password)
     {
-        Task<AuthResult> task = auth.createUserWithEmailAndPassword(email, password);
-
-        task.addOnCompleteListener(new OnCompleteListener<AuthResult>()
-        {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task)
-            {
-                if (task.isSuccessful())
+        auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>()
                 {
-                    FirebaseUser user =auth.getCurrentUser();
-
-                    if (user !=null)
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task)
                     {
-                        user.isEmailVerified();
+                        if (task.isSuccessful())
+                        {
+                            user = auth.getCurrentUser();
 
-                        Intent intent = new Intent(getApplicationContext(), EmailVerActivity.class);
-                        startActivity(intent);
+                            if (user != null)
+                            {
+                                user.sendEmailVerification();
+
+                                Intent intent = new Intent(getApplicationContext(), EmailVerActivity.class);
+                                startActivity(intent);
+                            }
+                        } else
+                        {
+                            textView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                            textView.setText("This Email is already Exist, Sign In");
+
+                            toast.setDuration(Toast.LENGTH_SHORT);
+                            toast.setView(view);
+                            toast.show();
+                            progressDialog.dismiss();
+                        }
                     }
-                }else
-                {
-                    Toast.makeText(getApplicationContext(), "this email has been signed up", Toast.LENGTH_SHORT).show();
-                }
+                });
+    }
 
-            }
-        });
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        toast.cancel();
     }
 }

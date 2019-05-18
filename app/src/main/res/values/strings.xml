@@ -22,5 +22,6 @@
     <string name="shave_beard">Shave Beard</string>
     <string name="add">add</string>
     <string name="toast_Please_Verify_Your_Email">Please Verify Your Email</string>
+    <string name="sign_out">sign out</string>
 
 </resources>

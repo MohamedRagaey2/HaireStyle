@@ -1,10 +1,13 @@
 package m.ragaey.mohamed.hairestyle;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,6 +19,13 @@ public class EmailVerActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
 
+    Toast toast;
+
+    LayoutInflater inflater;
+    View view;
+
+    TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -26,7 +36,15 @@ public class EmailVerActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        done_btn.setOnClickListener(new View.OnClickListener() {
+        inflater = LayoutInflater.from(getApplicationContext());
+        view = inflater.inflate(R.layout.custom_toast, null);
+        textView = view.findViewById(R.id.text);
+        textView.setTextColor(Color.WHITE);
+
+        toast = new Toast(getApplicationContext());
+
+        done_btn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
@@ -42,10 +60,21 @@ public class EmailVerActivity extends AppCompatActivity {
                         startActivity(intent);
                     } else
                     {
-                        Toast.makeText(getApplicationContext(), "Please Verify Your Email", Toast.LENGTH_SHORT).show();
+                        textView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                        textView.setText("Please Verify Your Email");
+
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(view);
+                        toast.show();
                     }
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+
     }
 }
