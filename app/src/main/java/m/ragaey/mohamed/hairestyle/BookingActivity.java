@@ -1,10 +1,14 @@
 package m.ragaey.mohamed.hairestyle;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class BookingActivity extends AppCompatActivity {
 
@@ -52,6 +57,7 @@ public class BookingActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
+    @SuppressLint("InflateParams")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -161,11 +167,13 @@ public class BookingActivity extends AppCompatActivity {
         BookList bookList = new BookList(name,hair,beard,pigment,musk,time,date, price);
 
         String key = databaseReference.child("allbooks").push().getKey();
+        assert key != null;
         databaseReference.child("allbooks").child(key).setValue(bookList);
     }
 
     public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener
     {
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState)
         {
@@ -189,6 +197,8 @@ public class BookingActivity extends AppCompatActivity {
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
@@ -198,7 +208,7 @@ public class BookingActivity extends AppCompatActivity {
             int day = c.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), R.style.dialoge,this, year, month, day);
+            return new DatePickerDialog(Objects.requireNonNull(getActivity()), R.style.dialoge,this, year, month, day);
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day)

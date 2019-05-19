@@ -26,10 +26,8 @@
     <string name="background">background</string>
     <string name="background_title">background title</string>
     <string name="toast_text">Toast text</string>
-    <string name="geting_books">Geting Books ...</string>
-    <string name="Please_Enter_AValid_Data">Please Enter A Valid Data</string>
+    <string name="geting_books">Geting Books …</string>
     <string name="Please_Verify_Your_Email">Please Verify Your Email</string>
-    <string name="Please_Enter_AValid_Data">Please Enter A Valid Data</string>
     <string name="Please_SignUp_Firstly">Please Sign Up Firstly</string>
     <string name="Please_Enter_AValid_Data">Please Enter A Valid Data</string>
     <string name="This_Email_is_already_Exist_SignIn">This Email is already Exist, Sign In</string>
