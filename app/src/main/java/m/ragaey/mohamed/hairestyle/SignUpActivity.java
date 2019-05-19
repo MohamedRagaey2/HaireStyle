@@ -1,5 +1,6 @@
 package m.ragaey.mohamed.hairestyle;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -39,6 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
+    @SuppressLint("InflateParams")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -69,7 +71,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password))
                 {
                     textView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                    textView.setText("Please Enter A Valid Data");
+                    textView.setText(R.string.Please_Enter_AValid_Data);
 
                     toast.setDuration(Toast.LENGTH_SHORT);
                     toast.setView(view);
@@ -110,7 +112,7 @@ public class SignUpActivity extends AppCompatActivity {
                         } else
                         {
                             textView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                            textView.setText("This Email is already Exist, Sign In");
+                            textView.setText(R.string.This_Email_is_already_Exist_SignIn);
 
                             toast.setDuration(Toast.LENGTH_SHORT);
                             toast.setView(view);

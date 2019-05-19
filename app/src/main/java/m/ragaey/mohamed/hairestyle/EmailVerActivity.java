@@ -1,5 +1,6 @@
 package m.ragaey.mohamed.hairestyle;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class EmailVerActivity extends AppCompatActivity {
 
     TextView textView;
 
+    @SuppressLint("InflateParams")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -61,7 +63,7 @@ public class EmailVerActivity extends AppCompatActivity {
                     } else
                     {
                         textView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                        textView.setText("Please Verify Your Email");
+                        textView.setText(R.string.Please_Verify_Your_Email);
 
                         toast.setDuration(Toast.LENGTH_SHORT);
                         toast.setView(view);

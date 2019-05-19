@@ -139,7 +139,7 @@ public class BookingActivity extends AppCompatActivity {
                 if (name.length() == 0 || !hair.isChecked() && !beard.isChecked() && !pigment.isChecked() && !musk.isChecked() || time_txt.length() == 0 || date_txt.length() == 0)
                 {
                     textView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                    textView.setText("Please Enter A Valid Data");
+                    textView.setText(R.string.Please_Enter_AValid_Data);
 
                     toast.setDuration(Toast.LENGTH_SHORT);
                     toast.setView(view);

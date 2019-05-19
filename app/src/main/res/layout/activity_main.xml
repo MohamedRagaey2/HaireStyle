@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/back"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/background"
         />
 
     <LinearLayout
@@ -27,6 +28,7 @@
             android:layout_weight="1"
             android:src="@drawable/title"
             android:padding="20dp"
+            android:contentDescription="@string/background_title"
             />
 
         <Button

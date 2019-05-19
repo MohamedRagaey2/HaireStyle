@@ -66,7 +66,7 @@ public class StartActivity extends AppCompatActivity {
         recyclerView.setAdapter(bookingAdapter);
 
         progressDialog = new ProgressDialog(StartActivity.this);
-        progressDialog.setMessage("Geting Books ...");
+        progressDialog.setMessage(getString(R.string.geting_books));
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
         progressDialog.setCancelable(false);
@@ -124,14 +124,12 @@ public class StartActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item)
     {
         // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.sign_out:
-                FirebaseAuth.getInstance().signOut();
-                Intent n = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(n);
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.sign_out) {
+            FirebaseAuth.getInstance().signOut();
+            Intent n = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(n);
+        } else {
+            return super.onOptionsItemSelected(item);
         }
         return true;
     }

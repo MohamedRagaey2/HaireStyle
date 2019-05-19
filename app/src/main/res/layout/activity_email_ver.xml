@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/back"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/background"
         />
 
     <LinearLayout

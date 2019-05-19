@@ -1,5 +1,6 @@
 package m.ragaey.mohamed.hairestyle;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -40,6 +41,7 @@ public class SignInActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
+    @SuppressLint("InflateParams")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -71,7 +73,7 @@ public class SignInActivity extends AppCompatActivity {
                 {
                     //Toast.makeText(getApplicationContext(), "Please Enter A Valid Data", Toast.LENGTH_SHORT).show();
                     textView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                    textView.setText("Please Enter A Valid Data");
+                    textView.setText(R.string.Please_Enter_AValid_Data);
 
                     toast.setDuration(Toast.LENGTH_SHORT);
                     toast.setView(view);
@@ -125,7 +127,7 @@ public class SignInActivity extends AppCompatActivity {
                         } else
                         {
                             //Toast.makeText(getApplicationContext(), "Please Sign Up Firstly", Toast.LENGTH_SHORT).show();
-                            textView.setText("Please Sign Up Firstly");
+                            textView.setText(R.string.Please_SignUp_Firstly);
 
                             toast.setDuration(Toast.LENGTH_SHORT);
                             toast.setView(view);
