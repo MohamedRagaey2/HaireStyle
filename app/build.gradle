@@ -1,3 +1,4 @@
+//noinspection GradleCompatible
 apply plugin: 'com.android.application'
 
 android {
@@ -15,6 +16,7 @@ android {
     defaultConfig {
         applicationId "m.ragaey.mohamed.hairestyle"
         minSdkVersion 14
+        //noinspection OldTargetApi
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"

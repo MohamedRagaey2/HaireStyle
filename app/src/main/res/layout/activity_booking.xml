@@ -60,7 +60,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            />
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <CheckBox
             android:id="@+id/shave_beard_chk"
@@ -74,7 +74,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            />
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <CheckBox
             android:id="@+id/hair_pigment_chk"
@@ -88,7 +88,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            />
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <CheckBox
             android:id="@+id/face_musk_chk"
@@ -102,7 +102,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            />
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -124,7 +124,7 @@
                 android:text="@string/set_time"
                 android:background="@drawable/sign_up_btn"
                 android:layout_marginRight="20dp"
-                tools:ignore="NestedWeights" />
+                tools:ignore="ButtonStyle,NestedWeights,RtlHardcoded" />
 
             <Button
                 android:id="@+id/set_date_btn"
@@ -134,7 +134,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:text="@string/set_date"
                 android:background="@drawable/sign_up_btn"
-                />
+                tools:ignore="ButtonStyle" />
 
         </LinearLayout>
 
@@ -161,7 +161,7 @@
                 android:textSize="20sp"
                 android:hint="@string/_00_00"
                 android:background="#fff"
-                tools:ignore="NestedWeights" />
+                tools:ignore="NestedWeights,RtlHardcoded" />
 
             <TextView
                 android:id="@+id/date_txt"
