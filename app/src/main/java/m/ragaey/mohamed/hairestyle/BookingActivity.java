@@ -187,10 +187,11 @@ public class BookingActivity extends AppCompatActivity {
                     DateFormat.is24HourFormat(getActivity()));
         }
 
+        @SuppressLint("DefaultLocale")
         public void onTimeSet(TimePicker view, int hourOfDay, int minute)
         {
             // Do something with the time chosen by the user
-            selected_time.setText("" + hourOfDay + " : " + minute);
+            selected_time.setText(String.format("%d : %d", hourOfDay, minute));
         }
     }
 
@@ -211,11 +212,12 @@ public class BookingActivity extends AppCompatActivity {
             return new DatePickerDialog(Objects.requireNonNull(getActivity()), R.style.dialoge,this, year, month, day);
         }
 
+        @SuppressLint("DefaultLocale")
         public void onDateSet(DatePicker view, int year, int month, int day)
         {
             // Do something with the date chosen by the user
             int month2 = month + 1;
-            selected_date.setText(day + "/" + month2  + "/" + year);
+            selected_date.setText(String.format("%s/%d/%d", String.valueOf(day), month2, year));
         }
     }
 }
